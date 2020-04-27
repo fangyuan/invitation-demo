@@ -1,0 +1,80 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "react-hooks",
+    "import",
+    "json",
+    "prettier"
+  ],
+  "extends": [
+    "airbnb",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier/@typescript-eslint"
+  ],
+  "rules": {
+    "@typescript-eslint/indent": ["error", 2],
+    "@typescript-eslint/no-this-alias": "off", 
+    "@typescript-eslint/no-var-requires": "error",
+    "semi": "off",
+    "@typescript-eslint/semi": ["error"],
+    "comma-dangle": ["error", "only-multiline"],
+    "import/prefer-default-export": "off",
+    "indent": ["error", 2, {
+      "SwitchCase": 1
+    }],
+    "jsx-a11y/anchor-is-valid": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "no-console": "warn",
+    "no-tabs": "error",
+    "no-unused-vars": [
+      "error",
+      {
+        "args": "after-used",
+        "ignoreRestSiblings": true,
+        "vars": "all"
+      }
+    ],
+    "no-use-before-define": [
+      "error",
+      {
+        "classes": true,
+        "functions": true,
+        "variables": true
+      }
+    ],
+    "object-curly-spacing": [ 2, "always" ],
+    "quotes": ["error", "single"],
+    "space-before-blocks": [2, "always"],
+    "template-curly-spacing": [2, "always"],
+    "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
+  },
+  "env": {
+    "browser": true
+  },
+  "settings": {
+    "import/extensions": [
+      ".js",
+      ".jsx",
+      ".ts",
+      ".d.ts",
+      ".tsx",
+      ".json"
+    ],
+    "import/resolver": {
+      "webpack": {
+        "config": "webpack.config.js"
+      }
+    }
+  } 
+}

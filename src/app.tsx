@@ -1,7 +1,5 @@
 import React from 'react';
 
-const App = () => {
-  return <div>todo</div>;
-};
+const App = (): JSX.Element => <div>todo</div>;
 
 export default App;
