@@ -1,0 +1,41 @@
+{
+  "name": "invitation-demo",
+  "version": "0.0.1",
+  "license": "UNLICENSED",
+  "author": {
+    "name": "fangyuan",
+    "email": "chengfangyuan2008@gmail.com",
+    "url": "https://github.com/fangyuan"
+  },
+  "repository": {
+    "url": "https://github.com/fangyuan/invitation-demo"
+  },
+  "scripts": {
+    "start": "yarn clean && webpack-dev-server --color",
+    "build": "yarn clean && webpack -p",
+    "profile": "yarn clean && profile=true webpack -p --profile",
+    "lint": "npm-run-all --parallel lint:js lint:css",
+    "lint:fix": "npm-run-all --parallel lint:js:fix lint:css:fix",
+    "lint:js": "yarn eslint src --ext .tsx,.ts,.d.ts,.js,.json",
+    "lint:js:fix": "yarn eslint src --ext .tsx,.ts,.d.ts,.js,.json --fix",
+    "lint:css": "yarn stylelint --syntax scss $(find src -name '*.scss')",
+    "lint:css:fix": "yarn stylelint --syntax scss --fix $(find src -name '*.scss')",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "axios": "0.19.2",
+    "react": "16.13.1",
+    "react-dom": "16.13.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "prettier": "^2.0.5",
+    "typescript": "3.8.3",
+    "webpack": "4.43.0",
+    "webpack-cli": "3.3.11",
+    "webpack-dev-server": "3.10.3"
+  },
+  "engines": {
+    "node": ">=10"
+  }
+}
