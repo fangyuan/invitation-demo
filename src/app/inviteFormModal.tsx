@@ -38,8 +38,6 @@ const InviteFormModal = (props: Props): JSX.Element => {
   };
 
   const onSubmit = (e: React.FormEvent | React.MouseEvent<HTMLElement>): void => {
-    e.preventDefault();
-
     if (isSending) {
       return;
     }
@@ -62,7 +60,7 @@ const InviteFormModal = (props: Props): JSX.Element => {
     setIsSending(true);
     sendRequest({
       name: formData.name.value,
-      email: 'usedemail@airwallex.com' || formData.email.value,
+      email: formData.email.value,
     }).then(() => {
       setIsSending(false);
       onSuccess();
@@ -70,6 +68,7 @@ const InviteFormModal = (props: Props): JSX.Element => {
       setError(err.response?.data?.errorMessage || err.message);
       setIsSending(false);
     });
+    e.preventDefault();
   };
 
   const noops = (): void => {
