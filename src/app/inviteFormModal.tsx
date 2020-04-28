@@ -19,7 +19,13 @@ declare interface FormData {
   confirmEmail?: FormField;
 }
 
-const sendRequest = (data: {name: string; email: string}): Promise<AxiosResponse> => axios.post('https://l94wc2001h.execute-api.ap-southeast-2.amazonaws.com/prod/fake-auth', data);
+const sendRequest = (data: {
+  name: string;
+  email: string;
+}): Promise<AxiosResponse> => axios.post(
+  'https://l94wc2001h.execute-api.ap-southeast-2.amazonaws.com/prod/fake-auth',
+  data,
+);
 
 const InviteFormModal = (props: Props): JSX.Element => {
   const { onSuccess, visible } = props;
@@ -37,12 +43,18 @@ const InviteFormModal = (props: Props): JSX.Element => {
     });
   };
 
-  const onSubmit = (e: React.FormEvent | React.MouseEvent<HTMLElement>): void => {
+  const onSubmit = (
+    e: React.FormEvent | React.MouseEvent<HTMLElement>,
+  ): void => {
     if (isSending) {
       return;
     }
 
-    if (!formData?.name?.value || !formData?.email?.value || !formData?.confirmEmail?.value) {
+    if (
+      !formData?.name?.value
+      || !formData?.email?.value
+      || !formData?.confirmEmail?.value
+    ) {
       return;
     }
 
@@ -61,13 +73,16 @@ const InviteFormModal = (props: Props): JSX.Element => {
     sendRequest({
       name: formData.name.value,
       email: formData.email.value,
-    }).then(() => {
-      setIsSending(false);
-      onSuccess();
-    }).catch((err: AxiosError) => {
-      setError(err.response?.data?.errorMessage || err.message);
-      setIsSending(false);
-    });
+    })
+      .then(() => {
+        setIsSending(false);
+        onSuccess();
+      })
+      .catch((err: AxiosError) => {
+        setError(err.response?.data?.errorMessage || err.message);
+        setIsSending(false);
+      });
+
     e.preventDefault();
   };
 
@@ -111,11 +126,7 @@ const InviteFormModal = (props: Props): JSX.Element => {
           required
         />
 
-        <button
-          type="submit"
-          className="block"
-          onClick={onSubmit}
-        >
+        <button type="submit" className="block" onClick={onSubmit}>
           {isSending ? 'Sending, please wait' : 'Send'}
         </button>
 

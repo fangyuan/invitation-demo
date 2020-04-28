@@ -9,9 +9,7 @@ const App = (): JSX.Element => {
 
   return (
     <>
-      <WelcomeContent
-        onClick={(): void => setShowForm(true)}
-      />
+      <WelcomeContent onClick={(): void => setShowForm(true)} />
       <InviteFormModal
         onSuccess={(): void => {
           setShowForm(false);

@@ -5,11 +5,15 @@ const Footer = (): JSX.Element => (
   <div className={styles.footer}>
     <div>
       <span>Made with</span>
-      <span role="img" aria-label="love">❤️</span>
+      <span role="img" aria-label="love">
+        ❤️
+      </span>
       <span>in Melbourne.</span>
     </div>
     <div>
-      <span role="img" aria-label="copyright">©️</span>
+      <span role="img" aria-label="copyright">
+        ©️
+      </span>
       <span> 2020 Broccoli & Co. All Rights reserved.</span>
     </div>
   </div>
@@ -27,9 +31,13 @@ const WelcomeContent = ({ onClick }: Props): JSX.Element => (
         <div>A better way</div>
         <div>to enjoy every day.</div>
       </div>
-      <div className={styles.description}>Be the first to known when we launch.</div>
+      <div className={styles.description}>
+        Be the first to known when we launch.
+      </div>
       <div>
-        <button type="button" onClick={onClick}>Request an invite</button>
+        <button type="button" onClick={onClick}>
+          Request an invite
+        </button>
       </div>
     </div>
     <Footer />
