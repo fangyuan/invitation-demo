@@ -15,7 +15,11 @@ const Footer = (): JSX.Element => (
   </div>
 );
 
-const WelcomeContent = (): JSX.Element => (
+declare interface Props {
+  onClick: (event: React.MouseEvent<HTMLElement>) => void;
+}
+
+const WelcomeContent = ({ onClick }: Props): JSX.Element => (
   <div className={styles.page}>
     <div className={styles.header}> Broccoli & Co.</div>
     <div className={styles.mainContent}>
@@ -25,7 +29,7 @@ const WelcomeContent = (): JSX.Element => (
       </div>
       <div className={styles.description}>Be the first to known when we launch.</div>
       <div>
-        <button type="button">Request an invite</button>
+        <button type="button" onClick={onClick}>Request an invite</button>
       </div>
     </div>
     <Footer />
