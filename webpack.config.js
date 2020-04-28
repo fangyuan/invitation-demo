@@ -38,7 +38,7 @@ module.exports = {
   entry: path.resolve(__dirname, 'src/index.tsx'),
   mode: isProductionMode ? 'production' : 'development',
   output: {
-    publicPath: `//${ host }:${ port }/`,
+    publicPath: '/',
     filename: isProductionMode ? '[name]-[contenthash].js' : '[name].js',
     path: path.resolve(__dirname, 'dist'),
     crossOriginLoading: 'anonymous',
@@ -144,7 +144,7 @@ module.exports = {
     host,
     publicPath: '/',
     contentBase: path.resolve(__dirname, 'dist'),
-    allowedHosts: ['127.0.0.1', 'localhost'],
+    disableHostCheck: true,
     writeToDisk: true,
     open: true,
   },
