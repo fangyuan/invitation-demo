@@ -9,14 +9,14 @@ declare interface Props {
 }
 
 declare interface FormField {
-  value?: string;
+  value: string;
   hasError?: boolean;
 }
 
 declare interface FormData {
-  name?: FormField;
-  email?: FormField;
-  confirmEmail?: FormField;
+  name: FormField;
+  email: FormField;
+  confirmEmail: FormField;
 }
 
 const sendRequest = (data: {
@@ -29,7 +29,11 @@ const sendRequest = (data: {
 
 const InviteFormModal = (props: Props): JSX.Element => {
   const { onSuccess, visible } = props;
-  const [formData, setFormData] = useState<FormData>();
+  const [formData, setFormData] = useState<FormData>({
+    name: { value: '' },
+    email: { value: '' },
+    confirmEmail: { value: '' },
+  });
   const [isSending, setIsSending] = useState<boolean>(false);
   const [error, setError] = useState<string>();
 
@@ -51,14 +55,14 @@ const InviteFormModal = (props: Props): JSX.Element => {
     }
 
     if (
-      !formData?.name?.value
-      || !formData?.email?.value
-      || !formData?.confirmEmail?.value
+      !formData.name.value
+      || !formData.email.value
+      || !formData.confirmEmail.value
     ) {
       return;
     }
 
-    if (formData?.confirmEmail?.value !== formData?.email?.value) {
+    if (formData.confirmEmail.value !== formData.email.value) {
       setFormData({
         ...formData,
         confirmEmail: {
@@ -100,12 +104,12 @@ const InviteFormModal = (props: Props): JSX.Element => {
         <input
           type="text"
           name="name"
-          value={formData?.name?.value}
+          value={formData.name.value}
           onChange={(e): void => {
             e.persist();
             onFormFieldChange('name', e.target.value);
           }}
-          className={formData?.name?.hasError ? 'error' : ''}
+          className={formData.name?.hasError ? 'error' : ''}
           placeholder="Name"
           required
           minLength={3}
@@ -115,16 +119,16 @@ const InviteFormModal = (props: Props): JSX.Element => {
           name="email"
           value={formData?.email?.value}
           onChange={(e): void => onFormFieldChange('email', e.target.value)}
-          className={formData?.email?.hasError ? 'error' : ''}
+          className={formData.email?.hasError ? 'error' : ''}
           placeholder="Email"
           required
         />
         <input
           type="email"
           name="email"
-          value={formData?.confirmEmail?.value}
+          value={formData.confirmEmail?.value}
           onChange={(e): void => onFormFieldChange('confirmEmail', e.target.value)}
-          className={formData?.confirmEmail?.hasError ? 'error' : ''}
+          className={formData.confirmEmail?.hasError ? 'error' : ''}
           placeholder="Confirm Email"
           required
         />
