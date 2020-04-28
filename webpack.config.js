@@ -8,11 +8,31 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserJSPlugin = require('terser-webpack-plugin');
 const webpack = require('webpack');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const ENV = process.env.ENV || 'dev';
 const port = process.env.PORT || 3000;
 const host = process.env.HOST || '127.0.0.1';
 const isProductionMode = ENV !== 'dev';
+
+const plugins = [
+  new HtmlWebpackPlugin({
+    template: path.resolve(__dirname, 'index.html'),
+    templateParameters: {
+      ENV: process.env.ENV,
+    },
+    favicon: path.resolve(__dirname, './src/images/favicon.ico'),
+  }),
+  new MiniCssExtractPlugin({
+    filename: '[name]-[hash].css',
+  }),
+  new webpack.DefinePlugin({
+    'process.env.ENV': JSON.stringify(ENV),
+  }),
+];
+if (process.env.profile) {
+  plugins.push(new BundleAnalyzerPlugin());
+}
 
 module.exports = {
   entry: path.resolve(__dirname, 'src/index.tsx'),
@@ -35,7 +55,9 @@ module.exports = {
         test: /\.css$/,
         use: [
           {
-            loader: isProductionMode ? MiniCssExtractPlugin.loader : 'style-loader',
+            loader: isProductionMode
+              ? MiniCssExtractPlugin.loader
+              : 'style-loader',
           },
           {
             loader: 'css-loader',
@@ -46,7 +68,9 @@ module.exports = {
         test: /\.scss$/,
         use: [
           {
-            loader: isProductionMode ? MiniCssExtractPlugin.loader : 'style-loader',
+            loader: isProductionMode
+              ? MiniCssExtractPlugin.loader
+              : 'style-loader',
           },
           {
             loader: 'typings-for-css-modules-loader',
@@ -98,23 +122,12 @@ module.exports = {
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.json'],
-    modules: [path.resolve(__dirname, 'node_modules'), path.resolve(__dirname, 'src')],
+    modules: [
+      path.resolve(__dirname, 'node_modules'),
+      path.resolve(__dirname, 'src'),
+    ],
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, 'index.html'),
-      templateParameters: {
-        ENV: process.env.ENV,
-      },
-      favicon: path.resolve(__dirname, './src/images/favicon.ico'),
-    }),
-    new MiniCssExtractPlugin({
-      filename: '[name]-[hash].css',
-    }),
-    new webpack.DefinePlugin({
-      'process.env.ENV': JSON.stringify(ENV),
-    }),
-  ],
+  plugins,
   optimization: {
     runtimeChunk: 'single',
     splitChunks: {
@@ -133,5 +146,6 @@ module.exports = {
     contentBase: path.resolve(__dirname, 'dist'),
     allowedHosts: ['127.0.0.1', 'localhost'],
     writeToDisk: true,
+    open: true,
   },
 };
