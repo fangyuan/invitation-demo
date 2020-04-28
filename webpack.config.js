@@ -65,13 +65,18 @@ module.exports = {
               ident: 'postcss',
               plugins: () => [
                 require('autoprefixer')(),
+                require('postcss-plugin-px2rem')({
+                  rootValue: 16,
+                }),
               ],
             },
           },
           {
             loader: 'sass-loader',
             options: {
-              outputStyle: isProductionMode ? 'compressed' : 'nested',
+              sassOptions: {
+                outputStyle: isProductionMode ? 'compressed' : 'nested',
+              },
               sourceMap: true,
             },
           },

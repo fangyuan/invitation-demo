@@ -1,0 +1,63 @@
+@import '~normalize.css';
+
+$borderStyle: 1px solid rgba(lightgray, 0.5);
+
+:global {
+  button {
+    border: $borderStyle;
+    border-radius: 4px;
+    padding: 8px;
+    background-color: white;
+    outline: none;
+
+    &:hover,
+    &:focus {
+      background-color: lightgray;
+      color: black;
+    }
+  }
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header {
+  @extend .flex-center;
+  flex-basis: 64px;
+  border-bottom: $borderStyle;
+}
+
+.main-content {
+  flex-grow: 1;
+  @extend .flex-center;
+  flex-direction: column;
+  color: #333333;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  word-spacing: 8px;
+}
+
+.description {
+  line-height: 50px;
+}
+
+.footer {
+  @extend .flex-center;
+  flex-basis: 100px;
+  flex-direction: column;
+  border-top: $borderStyle;
+}

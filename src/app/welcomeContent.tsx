@@ -1,7 +1,8 @@
 import React from 'react';
+import styles from './welcomeContent.scss';
 
 const Footer = (): JSX.Element => (
-  <div className="footer">
+  <div className={styles.footer}>
     <div>
       <span>Made with</span>
       <span role="img" aria-label="love">❤️</span>
@@ -15,11 +16,20 @@ const Footer = (): JSX.Element => (
 );
 
 const WelcomeContent = (): JSX.Element => (
-  <>
-    <div className="header"> Broccoli & Co.</div>
-    <div className="content">todo</div>
+  <div className={styles.page}>
+    <div className={styles.header}> Broccoli & Co.</div>
+    <div className={styles.mainContent}>
+      <div className={styles.title}>
+        <div>A better way</div>
+        <div>to enjoy every day.</div>
+      </div>
+      <div className={styles.description}>Be the first to known when we launch.</div>
+      <div>
+        <button type="button">Request an invite</button>
+      </div>
+    </div>
     <Footer />
-  </>
+  </div>
 );
 
 export default WelcomeContent;
