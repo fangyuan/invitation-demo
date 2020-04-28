@@ -29,5 +29,14 @@
     margin: 16px 0;
     border: 1px solid rgb(238,238,238);
     box-sizing: border-box; 
+
+    &.error {
+      border: 1px solid red;
+      color: red;
+      &:focus {
+        border: 1px solid rgb(238,238,238);
+        color: black;
+      }
+    }
   }
 }

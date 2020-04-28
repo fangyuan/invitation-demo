@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 import Modal from 'components/modal';
+import styles from './inviteFormModal.scss';
 
 declare interface Props {
   visible?: boolean;
-  onClose: () => void;
+  onSuccess: () => void;
 }
 
 declare interface FormField {
@@ -17,10 +19,13 @@ declare interface FormData {
   confirmEmail?: FormField;
 }
 
+const sendRequest = (data: {name: string; email: string}): Promise<AxiosResponse> => axios.post('https://l94wc2001h.execute-api.ap-southeast-2.amazonaws.com/prod/fake-auth', data);
+
 const InviteFormModal = (props: Props): JSX.Element => {
-  const { visible } = props;
+  const { onSuccess, visible } = props;
   const [formData, setFormData] = useState<FormData>({});
   const [isSending, setIsSending] = useState(false);
+  const [error, setError] = useState<string>();
 
   const onFormFieldChange = (name: keyof FormData, value: string): void => {
     setFormData({
@@ -32,12 +37,17 @@ const InviteFormModal = (props: Props): JSX.Element => {
     });
   };
 
-  const onSubmit = (): void => {
+  const onSubmit = (e: React.FormEvent | React.MouseEvent<HTMLElement>): void => {
+    e.preventDefault();
+
     if (isSending) {
       return;
     }
 
-    /* browser form will help validate input field value */
+    if (!formData?.name?.value || !formData?.email?.value || !formData?.confirmEmail?.value) {
+      return;
+    }
+
     if (formData?.confirmEmail?.value !== formData?.email?.value) {
       setFormData({
         ...formData,
@@ -50,6 +60,16 @@ const InviteFormModal = (props: Props): JSX.Element => {
     }
 
     setIsSending(true);
+    sendRequest({
+      name: formData.name.value,
+      email: 'usedemail@airwallex.com' || formData.email.value,
+    }).then(() => {
+      setIsSending(false);
+      onSuccess();
+    }).catch((err: AxiosError) => {
+      setError(err.response?.data?.errorMessage || err.message);
+      setIsSending(false);
+    });
   };
 
   const noops = (): void => {
@@ -62,12 +82,13 @@ const InviteFormModal = (props: Props): JSX.Element => {
 
   return (
     <Modal title="Request an invite" onClose={noops} visible>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} method="POST" className={styles.form}>
         <input
           type="text"
           name="name"
           value={formData?.name?.value}
           onChange={(e): void => onFormFieldChange('name', e.target.value)}
+          className={formData?.name?.hasError ? 'error' : ''}
           placeholder="Name"
           required
           minLength={3}
@@ -77,6 +98,7 @@ const InviteFormModal = (props: Props): JSX.Element => {
           name="email"
           value={formData?.email?.value}
           onChange={(e): void => onFormFieldChange('email', e.target.value)}
+          className={formData?.email?.hasError ? 'error' : ''}
           placeholder="Email"
           required
         />
@@ -85,6 +107,7 @@ const InviteFormModal = (props: Props): JSX.Element => {
           name="email"
           value={formData?.confirmEmail?.value}
           onChange={(e): void => onFormFieldChange('confirmEmail', e.target.value)}
+          className={formData?.confirmEmail?.hasError ? 'error' : ''}
           placeholder="Confirm Email"
           required
         />
@@ -96,6 +119,8 @@ const InviteFormModal = (props: Props): JSX.Element => {
         >
           {isSending ? 'Sending, please wait' : 'Send'}
         </button>
+
+        {error && <div>{error}</div>}
       </form>
     </Modal>
   );

@@ -1,0 +1,11 @@
+.form {
+  button {
+    margin-top: 1.5rem;
+
+    & + * {
+      margin-top: 1rem;
+      font-style: italic;
+      text-align: center;
+    }
+  }
+}

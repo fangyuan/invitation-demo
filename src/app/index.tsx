@@ -13,7 +13,10 @@ const App = (): JSX.Element => {
         onClick={(): void => setShowForm(true)}
       />
       <InviteFormModal
-        onClose={(): void => setShowForm(false)}
+        onSuccess={(): void => {
+          setShowForm(false);
+          setShowSuccessModal(true);
+        }}
         visible={showForm}
       />
       <InviteSuccessModal
