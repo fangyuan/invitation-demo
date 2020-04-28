@@ -4,8 +4,8 @@ import WelcomeContent from 'app/welcomeContent';
 import InviteSuccessModal from 'app/intivteSuccessModal';
 
 const App = (): JSX.Element => {
-  const [showForm, setShowForm] = useState(false);
-  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showForm, setShowForm] = useState<boolean>();
+  const [showSuccessModal, setShowSuccessModal] = useState<boolean>();
 
   return (
     <>

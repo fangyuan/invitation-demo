@@ -9,7 +9,7 @@ declare interface Props {
 }
 
 declare interface FormField {
-  value: string;
+  value?: string;
   hasError?: boolean;
 }
 
@@ -29,8 +29,8 @@ const sendRequest = (data: {
 
 const InviteFormModal = (props: Props): JSX.Element => {
   const { onSuccess, visible } = props;
-  const [formData, setFormData] = useState<FormData>({});
-  const [isSending, setIsSending] = useState(false);
+  const [formData, setFormData] = useState<FormData>();
+  const [isSending, setIsSending] = useState<boolean>(false);
   const [error, setError] = useState<string>();
 
   const onFormFieldChange = (name: keyof FormData, value: string): void => {
@@ -101,7 +101,10 @@ const InviteFormModal = (props: Props): JSX.Element => {
           type="text"
           name="name"
           value={formData?.name?.value}
-          onChange={(e): void => onFormFieldChange('name', e.target.value)}
+          onChange={(e): void => {
+            e.persist();
+            onFormFieldChange('name', e.target.value);
+          }}
           className={formData?.name?.hasError ? 'error' : ''}
           placeholder="Name"
           required

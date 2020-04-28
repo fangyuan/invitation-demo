@@ -19,7 +19,7 @@ const InviteSuccessModal = (props: Props): JSX.Element => {
       <div className={styles.content}>
         <div>
           You will be one of the first to experience Broccoli & Co. when we
-          lancuh.
+          launch.
         </div>
         <button className="block" type="button" onClick={onClose}>
           OK

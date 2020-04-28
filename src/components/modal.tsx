@@ -1,14 +1,11 @@
 import * as React from 'react';
 import styles from './modal.scss';
 
-export interface ModalWrapperPropsType {
+declare interface ModalPropsType {
+  children: React.ReactNode | React.ReactNodeArray;
+  title: string;
   visible?: boolean;
   onClose: () => void;
-}
-
-declare interface ModalPropsType extends ModalWrapperPropsType {
-  title: string;
-  children: React.ReactNode | React.ReactNodeArray;
 }
 
 const Modal = ({
