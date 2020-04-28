@@ -5,6 +5,7 @@ import styles from './inviteFormModal.scss';
 
 declare interface Props {
   visible?: boolean;
+  onClose: () => void;
   onSuccess: () => void;
 }
 
@@ -28,7 +29,7 @@ const sendRequest = (data: {
 );
 
 const InviteFormModal = (props: Props): JSX.Element => {
-  const { onSuccess, visible } = props;
+  const { onClose, onSuccess, visible } = props;
   const [formData, setFormData] = useState<FormData>({
     name: { value: '' },
     email: { value: '' },
@@ -90,16 +91,12 @@ const InviteFormModal = (props: Props): JSX.Element => {
     e.preventDefault();
   };
 
-  const noops = (): void => {
-    // do nothing
-  };
-
   if (!visible) {
     return null;
   }
 
   return (
-    <Modal title="Request an invite" onClose={noops} visible>
+    <Modal title="Request an invite" onClose={onClose} visible>
       <form onSubmit={onSubmit} method="POST" className={styles.form}>
         <input
           type="text"

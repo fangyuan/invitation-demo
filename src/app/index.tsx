@@ -11,6 +11,7 @@ const App = (): JSX.Element => {
     <>
       <WelcomeContent onClick={(): void => setShowForm(true)} />
       <InviteFormModal
+        onClose={(): void => setShowForm(false)}
         onSuccess={(): void => {
           setShowForm(false);
           setShowSuccessModal(true);
