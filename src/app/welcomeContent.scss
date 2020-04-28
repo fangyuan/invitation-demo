@@ -1,26 +1,5 @@
-@import '~normalize.css';
+@import '~styles/common';
 @import '~styles/var';
-
-:global {
-  button {
-    border: $borderStyle;
-    border-radius: 4px;
-    padding: 8px;
-    background-color: white;
-    outline: none;
-
-    &.block {
-      display: block;
-      width: 100%;
-    }
-
-    &:hover,
-    &:focus {
-      background-color: lightgray;
-      color: black;
-    }
-  }
-}
 
 .page {
   display: flex;

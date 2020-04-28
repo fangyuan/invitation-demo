@@ -1,0 +1,33 @@
+@import '~normalize.css';
+@import '~styles/var';
+
+:global {
+  button {
+    border: $borderStyle;
+    border-radius: 4px;
+    padding: 8px;
+    background-color: white;
+    outline: none;
+
+    &.block {
+      display: block;
+      width: 100%;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: lightgray;
+      color: black;
+    }
+  }
+
+  input[type="text"],
+  input[type="email"] {
+    display: block;
+    width: 100%;
+    padding: 5px 16px;
+    margin: 16px 0;
+    border: 1px solid rgb(238,238,238);
+    box-sizing: border-box; 
+  }
+}
