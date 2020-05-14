@@ -20,7 +20,8 @@
     "lint:js:fix": "yarn eslint src --ext .tsx,.ts,.d.ts,.js,.json --fix",
     "lint:css": "yarn stylelint --syntax scss $(find src -name '*.scss')",
     "lint:css:fix": "yarn stylelint --syntax scss --fix $(find src -name '*.scss')",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "test": "jest"
   },
   "dependencies": {
     "axios": "0.19.2",
@@ -37,6 +38,7 @@
     "@babel/plugin-transform-runtime": "7.9.0",
     "@babel/preset-env": "7.9.5",
     "@babel/preset-react": "7.9.4",
+    "@babel/preset-typescript": "7.9.0",
     "@types/react": "16.9.34",
     "@types/react-dom": "16.9.6",
     "@typescript-eslint/eslint-plugin": "2.29.0",
@@ -57,6 +59,7 @@
     "eslint-plugin-react-hooks": "3.0.0",
     "html-webpack-plugin": "4.2.0",
     "husky": "4.2.5",
+    "jest": "26.0.1",
     "lint-staged": "10.1.7",
     "mini-css-extract-plugin": "0.9.0",
     "node-sass": "4.14.0",
